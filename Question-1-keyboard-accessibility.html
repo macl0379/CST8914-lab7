@@ -24,9 +24,10 @@ body {
 a{
   color: #006b3a;
 }
-main a{
+/* remove bad css */
+/* main a{
   outline: none;
-}
+} */
 h2 {
   margin-top: 0;
 }
@@ -89,19 +90,23 @@ article p {
   line-height: 1.4;
 }
 
+/* Change main-story to display to flex to ensure image displays properly when in correct html order */
 .main-story {
   clear: both;
   overflow: hidden;
   margin-bottom: 16px;
   padding-bottom: 16px;
+  display: flex;
 }
 
 .main-story img {
   width: 50%;
 }
 
+/* Remove margin to allow image to be positioned properly */
 .main-story .info {
-  margin-right: 50%;
+  /* margin-right: 50%; */
+  width: 50%;
   padding-right: 16px;
 }
 
@@ -193,12 +198,17 @@ article p {
   float: right;
 }
 
+button.btn-search {
+  background: none; 
+  padding: 0;
+  border: none;
+}
+
   </style>
 </head>
 
 <body>
   <header>
-
     <div class="container">
       <h1 class="logo">The Funion</h1>
       <!-- Maybe this could be improved with aria-activedescendant later? -->
@@ -209,80 +219,75 @@ article p {
         <a href="#">Business</a>
         <a href="#">Entertainment</a>
         <a href="#">Sports</a>
+        <!-- Recreate search function -->
+        <!-- <a href="#" class="btn-search pull-right"><img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" />Search</a>  -->
+        <search class="btn-search pull-right">
+          <label for="search" style="visibility: hidden;">Search</label>
+          <input type="text" id="search" name="search" placeholder="Search">
+          <button type="submit" class="btn-search"><img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" /></a>
+        </search>
       </nav>
-      <!-- Remove search from nav -->
-      <!-- Recreate search function -->
-      <!-- <a href="#" class="btn-search pull-right"><img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" />Search</a>  -->
-      <search>
-        <label for="search"><img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" /> Search</label>
-        <input type="text" id="search" name="search" placeholder="Search">
-      </search>
     </div>
   </header>
-  <div class="newsletter">
-    <div class="container">
-      <h3>Like the Funion? Consider joining our newsletter!</h3>
-      <input type="text">
-      <button type="button" onfocus="getFocus()">Sign up</button></div>
-      
+</div>
+<main class="container">
+  <!-- <h2 class="offscreen">Top story</h2> -->
+   <div class="tier-header">
+     <h2>Top story</h2>
+   </div>
+  <article class="main-story">
+    <div class="info">
+      <h3 class="headline">Study shows 9 out of 10 cats quietly judging their owners as they sleep</h3>
+      <p>
+        GRAND RAPIDS, MILorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <a href="#">Read More</a>
+        
+      </p>
+    </div>
+    <img tabindex="2" class="pull-right" src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/cat.jpg?raw=true" alt="A cat staring menacingly off into space">
+  </article>
+  
+  <div class="side-by-side">
+    <div class="column">
+      <div class="tier-header">
+        <!-- remove tab index -->
+        <h2>In the news</h2>
+      </div>
+      <article>
+        <h3 class="headline">Bee wonders if maybe everyone else is a drone and he's the only one who has it "figured out."</h3>
+        <!-- remove tab index -->
+        <p><a href="#"><b>Read More</b></a></p>
+        <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/bee.jpg?raw=true" alt="A bee on top of a flower" />
+      </article>
+    </div>
+    <div class="column">
+      <article>
+        <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/telephone.jpg?raw=true" alt="A red, London telephone booth" />
+        <div class="info">
+          <h3 class="headline">Telephone booths. How is this still a thing?</h3>
+          <p>
+            LONDON-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <a href="#">Read More</a>
+          </p>
+        </div>
+      </article>
     </div>
   </div>
-  <main class="container">
-    <!-- <h2 class="offscreen">Top story</h2> -->
-    <h2>Top story</h2>
-    <article class="main-story">
-      <img class="pull-right" src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/cat.jpg?raw=true" alt="A cat staring menacingly off into space">
-      <div class="info">
-        <h3 class="headline">Study shows 9 out of 10 cats quietly judging their owners as they sleep</h3>
-        <p>
-          GRAND RAPIDS, MILorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <a href="#">Read More</a>
-          
-        </p>
-      </div>
-    </article>
-  
-    <div class="side-by-side">
-      <div class="column">
-        <div class="tier-header">
-          <!-- remove tab index -->
-          <h2>In the news</h2>
-        </div>
-        <article>
-          <h3 class="headline">Bee wonders if maybe everyone else is a drone and he's the only one who has it "figured out."</h3>
-          <!-- remove tab index -->
-          <p><a href="#"><b>Read More</b></a></p>
-          <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/bee.jpg?raw=true" alt="A bee on top of a flower" />
-        </article>
-      </div>
-      <div class="column">
-        <article>
-          <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/telephone.jpg?raw=true" alt="A red, London telephone booth" />
-          <div class="info">
-            <h3 class="headline">Telephone booths. How is this still a thing?</h3>
-            <p>
-              LONDON-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-              irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <a href="#">Read More</a>
-            </p>
-          </div>
-        </article>
-      </div>
+  <div class="three-col">
+    <div class="tier-header">
+      <h2>Recommended</h2>
     </div>
-    <div class="three-col">
-      <div class="tier-header">
-        <h2>Recommended</h2>
-      </div>
-      <div class="columns">
-        <article>
-          <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/dog.jpg?raw=true" alt="A dog at a desk looks up at a laptop and mouse" />
-          <div class="info">
-            <h3 class="headline">Turn man's best friend into man's best personal assistant. <a href="#">Read More</a></h3>
-          </div>
-        </article>
-        <article>
-          <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/coffee.jpg?raw=true" alt="A cup of coffee on a table" />
-          <div class="info">
-            <h3 class="headline">San Franciscans are losing their minds over this third wave, artisanal, fair trade, handcrafted, locavore coffee. <a href="#">Read More</a></h3>
+    <div class="columns">
+      <article>
+        <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/dog.jpg?raw=true" alt="A dog at a desk looks up at a laptop and mouse" />
+        <div class="info">
+          <h3 class="headline">Turn man's best friend into man's best personal assistant. <a href="#">Read More</a></h3>
+        </div>
+      </article>
+      <article>
+        <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/coffee.jpg?raw=true" alt="A cup of coffee on a table" />
+        <div class="info">
+          <h3 class="headline">San Franciscans are losing their minds over this third wave, artisanal, fair trade, handcrafted, locavore coffee. <a href="#">Read More</a></h3>
         </article>
         <article>
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/football.jpg?raw=true" alt="A football player hands the ball off to another player" />
@@ -294,16 +299,32 @@ article p {
     </div>
     
   </main>
-  <!--   stuff can be added here :)
+
   <footer>
+    <!-- Moved newsletter into footer -->
+    <div class="newsletter">
+      <div class="container">
+        <h3>Like the Funion? Consider joining our newsletter!</h3>
+        <!-- Change input type and add placeholder -->
+        <input type="email" placeholder="Enter your email address" />
+        <!-- Remove onFocus action to button
+         Changed functionality to display alert on submission
+        <button type="button" onfocus="getFocus()">Sign up</button></div> -->
+        <button type="button" onclick="signUp()">Sign up</button></div>
+        
+      </div>
   </footer>
-  -->
+  
   
   <script>
     function getFocus() {
       window.open('https://aidaform.com/templates/thank-you-page-with-redirects.html','mywindow').focus()
     }
+    function signUp(){
+      alert("Thank you for signing up for our newsletter!");
+    }
     </script>
+
 </body>
 
 </html>

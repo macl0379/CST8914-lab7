@@ -23,32 +23,57 @@
     
     fieldset ul {
       margin: 0;
-    }</style>
+    }
+    textarea{
+      width: 300px;
+      height: 150px;
+    }
+    </style>
     </head>
     <body>
         <h1>Feedback form</h1>
+        <!-- Add explicit instructions -->
+        <span>Fields marked with <span class="required">*</span>(required) must be completed</span>
     <form>
         <div class="control">
-          <label>Full name <span class="required">*</span></label><input id="name" name="name" type="text" />
+          <label for="name">Full name <span class="required">*</span>(required)</label>
+          <input id="name" name="name" type="text" required placeholder="Enter your full name" autocomplete="name"/>
         </div>
         <div class="control">
-          <label>Biography</label><textarea id="biography" name="biography" type="text"></textarea>
-          <span>Include examples on your skills in JavaScript.</span>
+          <label for="biography">Biography</label>
+          <textarea id="biography" name="biography" type="text" placeholder="Tell us about yourself, include examples of your skills in JavaScript."></textarea>
+          <!-- Convert text to inline 
+          <span>Include examples on your skills in JavaScript.</span> -->
         </div>
-        
-          <div>Gender</div>
+        <!-- Change to fieldset -->
+         <fieldset>
+          <!-- Change to legend -->
+          <legend>Gender</legend>
           <div class="control">
-            <input id="gender_male" name="gender" type="radio" value="male" /><label>Male</label>
+            <!-- Add label for male -->
+            <label>
+              <input id="gender_male" name="gender" type="radio" value="male" />
+              Male
+            </label>
           </div>
           <div class="control">
-            <input id="gender_female" name="gender" type="radio" value="female" /><label>Female</label>
+            <!-- Add label for female -->
+             <label>
+               <input id="gender_female" name="gender" type="radio" value="female" />
+               Female
+             </label>
           </div>
+        </fieldset>
         
         <div class="control">
-          <input id="accept_agbs" name="accept_agbs" type="checkbox" value="1" /><label>I accept the terms and conditions</label>
+          <input id="accept_agbs" name="accept_agbs" type="checkbox" value="1" />
+          <label for="accept_agbs">I accept the terms and conditions</label>
         </div>
         <div class="control">
-          <input name="validate" type="hidden" value="1" /><input type="submit" value="Register" />
+          <!-- Change to button
+          <input name="validate" type="hidden" value="1" /> /> -->
+          <button type="submit" value="Register">Register</button>
+           
         </div>
       </form>
       

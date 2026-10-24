@@ -57,20 +57,21 @@ header {
   padding: 16px 0;
   border-bottom: 1px solid #ddd;
 }
-
-.offscreen {
+/* remove unused class */
+/* .offscreen {
   position: absolute;
   left: -10000px;
   top: -10000px;
-}
+} */
 
 .menu {
   padding: 16px 48px;
 }
 
+/* remove text decoration styling */
 .menu a {
   color: #000;
-  text-decoration: none;
+  /* text-decoration: none; */
   font-size: 18px;
   margin-right: 18px;
 }
@@ -177,10 +178,11 @@ article p {
   margin-right: 0;
 }
 
+/* remove positioning css because location of newsletter has been moved to footer tag at bottom */
 .newsletter {
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 0; */
   height: 60px;
   width: 100%;
   background: #000;
@@ -231,11 +233,13 @@ button.btn-search {
   </header>
 </div>
 <main class="container">
+  <!-- remove unused class and add approriate html to give consistency -->
   <!-- <h2 class="offscreen">Top story</h2> -->
    <div class="tier-header">
      <h2>Top story</h2>
    </div>
   <article class="main-story">
+
     <div class="info">
       <h3 class="headline">Study shows 9 out of 10 cats quietly judging their owners as they sleep</h3>
       <p>
@@ -244,7 +248,8 @@ button.btn-search {
         
       </p>
     </div>
-    <img tabindex="2" class="pull-right" src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/cat.jpg?raw=true" alt="A cat staring menacingly off into space">
+    <!-- moved image and css of section to ensure image comes after when manuveuring with keyboard -->
+    <img class="pull-right" src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/cat.jpg?raw=true" alt="A cat staring menacingly off into space">
   </article>
   
   <div class="side-by-side">
@@ -305,25 +310,23 @@ button.btn-search {
     <div class="newsletter">
       <div class="container">
         <h3>Like the Funion? Consider joining our newsletter!</h3>
-        <!-- Change input type and add placeholder -->
-        <input type="email" placeholder="Enter your email address" />
-        <!-- Remove onFocus action to button
-         Changed functionality to display alert on submission
-        <button type="button" onfocus="getFocus()">Sign up</button></div> -->
-        <button type="button" onclick="signUp()">Sign up</button></div>
-        
-      </div>
+        <!-- newsletter submission should be in form -->
+        <form>
+          <!-- Change input type and add placeholder -->
+          <input id="email" name="email" type="email" placeholder="Enter your email address" />
+          <!-- Remove onFocus action to button -->
+          <button type="submit">Sign up</button>
+        </form>
+      </div>  
+    </div>
   </footer>
   
-  
-  <script>
+  <!-- Unused script   -->
+  <!-- <script>
     function getFocus() {
       window.open('https://aidaform.com/templates/thank-you-page-with-redirects.html','mywindow').focus()
     }
-    function signUp(){
-      alert("Thank you for signing up for our newsletter!");
-    }
-    </script>
+  </script> -->
 
 </body>
 

@@ -16,66 +16,76 @@
     input + label {
       width: auto;
     }
-    
-    .error, .required {
+    /* add colour to error fieldset and messages */
+    .error, .required, .errors li, fieldset.errors legend {
       color: red;
+    }
+    fieldset.errors legend{
+      font-weight: bold;
+    }
+
+    fieldset.errors{
+      border-color: red;
     }
     
     fieldset ul {
       margin: 0;
     }
+
     textarea{
       width: 300px;
       height: 150px;
+      max-width: 90%;
     }
+    
     </style>
     </head>
     <body>
+
         <h1>Feedback form</h1>
-        <!-- Add explicit instructions -->
-        <span>Fields marked with <span class="required">*</span>(required) must be completed</span>
-    <form>
-        <div class="control">
-          <label for="name">Full name <span class="required">*</span>(required)</label>
-          <input id="name" name="name" type="text" required placeholder="Enter your full name" autocomplete="name"/>
+        <!-- Add instructions for form -->
+        <span>All labels with <span aria-hidden="true"><span class="required" aria-hidden="true">*</span>required</span> must be filled </span>
+<form>
+    <div class="control">
+          <!-- Add required and aria hidden to asterix span -->
+          <label for="name">Full name <span aria-hidden="true"><span class="required" aria-hidden="true">*</span>required</span></label>
+          <input id="name" name="name" type="text" placeholder="Enter your full name"/>
         </div>
         <div class="control">
-          <label for="biography">Biography</label>
+          <label for="biography">Biography <span aria-hidden="true"><span class="required" aria-hidden="true">*</span>required</span></label>
           <textarea id="biography" name="biography" type="text" placeholder="Tell us about yourself, include examples of your skills in JavaScript."></textarea>
-          <!-- Convert text to inline 
+          <!-- Convert text to placeholder which can be read by screen reader
           <span>Include examples on your skills in JavaScript.</span> -->
         </div>
         <!-- Change to fieldset -->
          <fieldset>
           <!-- Change to legend -->
           <legend>Gender</legend>
+          <span aria-hidden="true"><span class="required" aria-hidden="true">*</span>required</span>
           <div class="control">
             <!-- Add label for male -->
-            <label>
               <input id="gender_male" name="gender" type="radio" value="male" />
-              Male
-            </label>
-          </div>
-          <div class="control">
-            <!-- Add label for female -->
-             <label>
-               <input id="gender_female" name="gender" type="radio" value="female" />
-               Female
+              <label for="gender_male">Male</label>
+            </div>
+            <div class="control">
+              <!-- Add label for female -->
+              <input id="gender_female" name="gender" type="radio" value="female" />
+              <label for="gender_female">Female</label>
              </label>
           </div>
         </fieldset>
         
         <div class="control">
           <input id="accept_agbs" name="accept_agbs" type="checkbox" value="1" />
-          <label for="accept_agbs">I accept the terms and conditions</label>
+          <!-- Add required label -->
+          <label for="accept_agbs">I accept the terms and conditions <span aria-hidden="true"><span class="required" aria-hidden="true">*</span>required</span></label>
         </div>
         <div class="control">
-          <!-- Change to button
-          <input name="validate" type="hidden" value="1" /> /> -->
-          <button type="submit" value="Register">Register</button>
-           
+          <input name="validate" type="hidden" value="1" />
+          <input type="submit" value="Register" />
         </div>
       </form>
+
       
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
           <script>"use strict";
@@ -101,7 +111,7 @@
       
           if ((value = $.urlParam(input)) === null) {
             if ($('fieldset.errors').length === 0) {
-              $('form').prepend('<fieldset class="errors"><legend>Errors</legend><ul></ul></fieldset>');
+              $('form').prepend('<fieldset class="errors" role="alert"><legend>Errors</legend><ul></ul></fieldset>');
             }
       
             $referencedElement = null;
@@ -116,19 +126,25 @@
               $elementToDescribe = $input;
               $referencedElement = $input;
             }
-      // R.G. hint: fix next line ;)
-            $error = $('<a>' + message + '</a>');
+            // add id of error for reference to correct error
+            $error = $('<a href="#' + input + '">' + message + '</a>');
             $error.click(function (e) {
               // If we rely on the link's href pointing to the input's ID, it doesn't trigger forms mode in screen readers
               $referencedElement.focus();
               return e.preventDefault();
             });
+
             $elementToDescribe.attr('aria-describedby', input + '_description');
             $errorContainer.append('<li>').find('li:last').append($error);
-      
+
             if ($(':not(form):focus').length === 0) {
               // See https://stackoverflow.com/questions/46134247/jquery-setting-focus-doesnt-work-in-ie11/
-            
+              var item = $referencedElement[0];
+              // create new element for error and add message with styling
+              var newLabel = document.createElement("label");
+              newLabel.textContent = message;
+              newLabel.classList.add('error');
+              $input.parent().before(newLabel);
             }
           } else {
             if ($input.is(':checkbox')) {
@@ -150,7 +166,9 @@
             validateInput('gender', 'Please tell us your gender!');
             validateInput('accept_agbs', 'You must accept our terms and conditions!');
       
-            if ($('.error').length === 0) {
+            // Errors create fieldset with errors class not error
+            // if ($('.error').length === 0) {
+            if ($('.errors').length === 0) {
               return alert('All inputs are valid.');
             }
           }
